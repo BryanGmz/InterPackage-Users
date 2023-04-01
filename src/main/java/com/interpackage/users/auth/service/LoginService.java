@@ -18,19 +18,20 @@ import com.interpackage.users.model.User;
 
 @Service
 public class LoginService {
-    
+
     @Autowired
     JwtTokenUtil utilToken;
 
+    @Autowired
+    private UserDetailsService jwtInMemoryUserDetailsService;
 
-	@Autowired
-	private UserDetailsService jwtInMemoryUserDetailsService;
-    
-
-    public AuthToken doLogin(String user, String password) throws Exception{
+    public AuthToken doLogin(String user, String password) throws Exception {
+        
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         User test = new User();
         test.setName(user);
-        test.setPassword(password);
+        test.setPassword(passwordEncoder.encode(password));
+        
 
         Set<String> roles = new HashSet<>();
         roles.add("ADMIN");
@@ -40,17 +41,16 @@ public class LoginService {
         permissions.add("READ");
         permissions.add("WRITE");
 
-        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        
         Boolean matches = passwordEncoder.matches(password, test.getPassword());
-        if(matches){
+        if (matches) {
 
-		Map<String, Object> claims = new HashMap<>();
-        claims.put("permissions", permissions);
-        claims.put("roles", roles);
-        final UserDetails userDetails = jwtInMemoryUserDetailsService.loadUserByUsername(test.getName());
-            return new AuthToken(utilToken.generateToken(userDetails,claims));
-        }
-        else{
+            Map<String, Object> claims = new HashMap<>();
+            claims.put("permissions", permissions);
+            claims.put("roles", roles);
+            final UserDetails userDetails = jwtInMemoryUserDetailsService.loadUserByUsername(test.getName());
+            return new AuthToken(utilToken.generateToken(userDetails, claims));
+        } else {
             return null;
         }
 
