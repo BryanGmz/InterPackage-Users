@@ -36,8 +36,6 @@ public class User {
     @JoinColumn (name = "id_role", nullable = false)
     private Role role;
 
-
-
     public Long getIdUser() {
         return this.idUser;
     }

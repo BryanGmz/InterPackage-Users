@@ -2,22 +2,33 @@ package com.interpackage.users.auth.service;
 
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.interpackage.users.service.UserService;
+
 @Service
 public class JwtUserDetailsService implements UserDetailsService {
 
+	@Autowired
+	UserService userService;
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		if ("interpackage".equals(username)) {
-			return new User("interpackage", "$2a$10$ixlPY3AAd4ty1l6E2IsQ9OFZi2ba9ZQE0bP7RFcGIWNhyFrrT3YUi",
-					new ArrayList<>());
-		} else {
+
+		if (username != null && !username.isBlank()) {
+			try {
+				var user = userService.getUserByName(username);
+				return new User(username,user.getPassword(),new ArrayList<>());
+			} catch (Exception e) {
 			throw new UsernameNotFoundException("User not found with username: " + username);
+			}
+		} else {
+			throw new UsernameNotFoundException("User not found - no username");
 		}
 	}
 

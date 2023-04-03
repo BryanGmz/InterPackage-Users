@@ -14,7 +14,9 @@ import org.springframework.stereotype.Service;
 
 import com.interpackage.users.auth.model.AuthToken;
 import com.interpackage.users.auth.util.JwtTokenUtil;
+import com.interpackage.users.model.RolePermission;
 import com.interpackage.users.model.User;
+import com.interpackage.users.service.UserService;
 
 @Service
 public class LoginService {
@@ -25,30 +27,43 @@ public class LoginService {
     @Autowired
     private UserDetailsService jwtInMemoryUserDetailsService;
 
+    @Autowired
+    private UserService userService;
+
     public AuthToken doLogin(String user, String password) throws Exception {
-        
+
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        User test = new User();
-        test.setName(user);
-        test.setPassword(passwordEncoder.encode(password));
-        
-
-        Set<String> roles = new HashSet<>();
-        roles.add("ADMIN");
-        roles.add("CLIENT");
-
-        Set<String> permissions = new HashSet<>();
-        permissions.add("READ");
-        permissions.add("WRITE");
-
-        
-        Boolean matches = passwordEncoder.matches(password, test.getPassword());
+        var userDB = userService.getUserByName(user);
+        Boolean matches = passwordEncoder.matches(password, userDB.getPassword());
         if (matches) {
+            Set<String> roles = new HashSet<>();
+            roles.add(userDB.getRole().getName());
+
+            Map<String, Object> permissions = new HashMap<>();
+            for (RolePermission roleP : userDB.getRole().getRolePermissions()) {
+                Set<String> permission = new HashSet<>();
+                if (roleP.getEdition()) {
+                    permission.add("EDIT");
+                }
+                if (roleP.getElimination()) {
+                    permission.add("ELIMINATION");
+                }
+                if (roleP.getExport()) {
+                    permission.add("EXPORT");
+                }
+                if (roleP.getReading()) {
+                    permission.add("READ");
+                }
+                if (roleP.getWriting()) {
+                    permission.add("WRITE");
+                }
+                permissions.put(roleP.getPermission().getName(),permission);
+            }
 
             Map<String, Object> claims = new HashMap<>();
             claims.put("permissions", permissions);
             claims.put("roles", roles);
-            final UserDetails userDetails = jwtInMemoryUserDetailsService.loadUserByUsername(test.getName());
+            final UserDetails userDetails = jwtInMemoryUserDetailsService.loadUserByUsername(userDB.getName());
             return new AuthToken(utilToken.generateToken(userDetails, claims));
         } else {
             return null;
