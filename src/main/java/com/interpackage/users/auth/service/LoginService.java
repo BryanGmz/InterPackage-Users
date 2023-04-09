@@ -33,6 +33,10 @@ public class LoginService {
 
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         var userDB = userService.getUserByName(user);
+        if(userDB==null){
+            return null;
+        }
+
         Boolean matches = passwordEncoder.matches(password, userDB.getPassword());
         if (matches) {
             Set<String> roles = new HashSet<>();
