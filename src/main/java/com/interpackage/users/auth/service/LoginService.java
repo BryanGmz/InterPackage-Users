@@ -52,7 +52,7 @@ public class LoginService {
                 if (roleP.getReading()) {
                     permissions.add(roleP.getPermission().getName()+"::read");
                 }
-                if (roleP.getCreation()) {
+                if (roleP.getWriting()) {
                     permissions.add(roleP.getPermission().getName()+"::create");
                 }
             }

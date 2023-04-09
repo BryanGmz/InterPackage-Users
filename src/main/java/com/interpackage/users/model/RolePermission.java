@@ -26,7 +26,7 @@ public class RolePermission {
     private Boolean reading;
 
     @Column (nullable = false)
-    private Boolean creation;
+    private Boolean writing;
 
     @Column (nullable = false)
     private Boolean edition;
@@ -67,15 +67,15 @@ public class RolePermission {
     }
 
     public Boolean isWriting() {
-        return this.creation;
+        return this.writing;
     }
 
-    public Boolean getCreation() {
-        return this.creation;
+    public Boolean getWriting() {
+        return this.writing;
     }
 
-    public void setCreation(Boolean writing) {
-        this.creation = writing;
+    public void setWriting(Boolean writing) {
+        this.writing = writing;
     }
 
     public Boolean isEdition() {
