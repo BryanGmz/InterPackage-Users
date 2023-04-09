@@ -19,6 +19,10 @@ public class Permission {
     @Column (nullable = false, length = 500)
     private String description;
 
+    public void merge(Permission permission){
+        description = permission.description;
+    }
+
 
     public Long getIdPermission() {
         return this.idPermission;

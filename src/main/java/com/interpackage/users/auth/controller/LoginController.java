@@ -33,6 +33,14 @@ public class LoginController {
 		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 	}
 
+	@RequestMapping(value = "/verify-token", method = RequestMethod.GET)
+	public ResponseEntity<?> verifyToken()
+			throws Exception {
+
+		
+		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+	}
+
 
 
 }

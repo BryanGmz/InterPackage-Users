@@ -11,10 +11,10 @@ public class User {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    @Column (name = "id_user", nullable = false)
+    @Column (name = "id_user")
     private Long idUser;
 
-    @Column (nullable = false, length = 75)
+    @Column (nullable = false, length = 75, unique = true)
     private String name;
 
     @Column (nullable = false, length = 75)
@@ -26,7 +26,7 @@ public class User {
     @Column (nullable = false, length = 75)
     private String phone;
 
-    @Column (nullable = false, length = 75)
+    @Column (nullable = false, length = 75, unique = true)
     private String email;
 
     @Column (nullable = false, length = 250)
@@ -35,6 +35,14 @@ public class User {
     @ManyToOne
     @JoinColumn (name = "id_role", nullable = false)
     private Role role;
+
+    public void merge(User usr){
+        dpi = usr.dpi;
+        address = usr.address;
+        phone = usr.phone;
+        email = usr.email;
+        role = usr.role;
+    }
 
     public Long getIdUser() {
         return this.idUser;

@@ -16,7 +16,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 public class JwtTokenUtil implements Serializable {
 
 	
-	public static final long JWT_TOKEN_VALIDITY = 5*60*60;
+	public static final long JWT_TOKEN_VALIDITY = 12*60*60;
 
 	@Value("${jwt.secret}")
 	private String secret;

@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import com.interpackage.users.auth.model.AuthToken;
 import com.interpackage.users.auth.util.JwtTokenUtil;
 import com.interpackage.users.model.RolePermission;
-import com.interpackage.users.model.User;
 import com.interpackage.users.service.UserService;
 
 @Service
@@ -39,25 +38,23 @@ public class LoginService {
             Set<String> roles = new HashSet<>();
             roles.add(userDB.getRole().getName());
 
-            Map<String, Object> permissions = new HashMap<>();
+            Set<String> permissions = new HashSet<>();
             for (RolePermission roleP : userDB.getRole().getRolePermissions()) {
-                Set<String> permission = new HashSet<>();
                 if (roleP.getEdition()) {
-                    permission.add("EDIT");
+                    permissions.add(roleP.getPermission().getName()+"::edit");
                 }
                 if (roleP.getElimination()) {
-                    permission.add("ELIMINATION");
+                    permissions.add(roleP.getPermission().getName()+"::delete");
                 }
                 if (roleP.getExport()) {
-                    permission.add("EXPORT");
+                    permissions.add(roleP.getPermission().getName()+"::export");
                 }
                 if (roleP.getReading()) {
-                    permission.add("READ");
+                    permissions.add(roleP.getPermission().getName()+"::read");
                 }
-                if (roleP.getWriting()) {
-                    permission.add("WRITE");
+                if (roleP.getCreation()) {
+                    permissions.add(roleP.getPermission().getName()+"::create");
                 }
-                permissions.put(roleP.getPermission().getName(),permission);
             }
 
             Map<String, Object> claims = new HashMap<>();
