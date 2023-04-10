@@ -13,7 +13,7 @@ import com.interpackage.users.service.UserService;
 
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping ("/api/users/v1/users")
 public class UserController {
     private final UserService userService;
 

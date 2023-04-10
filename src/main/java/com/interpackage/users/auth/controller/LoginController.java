@@ -14,7 +14,7 @@ import com.interpackage.users.auth.model.UserCredential;
 import com.interpackage.users.auth.service.LoginService;
 
 @RestController
-@CrossOrigin
+@RequestMapping ("/api/users/v1")
 public class LoginController {
 
 	@Autowired
@@ -38,7 +38,7 @@ public class LoginController {
 			throws Exception {
 
 		
-		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+		return ResponseEntity.status(HttpStatus.OK).build();
 	}
 
 

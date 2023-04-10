@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/permissions")
+@RequestMapping ("/api/users/v1/permissions")
 public class PermissionController {
 
     private final PermissionService permissionService;
