@@ -15,9 +15,6 @@ public class SecurityConfiguration {
 	@Autowired
 	private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
-
-	
-
 	@Autowired
 	private JwtRequestFilter jwtRequestFilter;
 
@@ -25,7 +22,8 @@ public class SecurityConfiguration {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http
-				.csrf().disable().authorizeHttpRequests().requestMatchers("/api/users/v1/authenticate").permitAll()
+				.csrf().disable().authorizeHttpRequests()
+				.requestMatchers("/api/users/v1/authenticate").permitAll()
 				.requestMatchers(HttpMethod.OPTIONS, "/**")
 				.permitAll().anyRequest().authenticated().and().exceptionHandling()
 				.authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()

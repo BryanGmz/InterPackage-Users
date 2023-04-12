@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.interpackage.users.model.User;
 import com.interpackage.users.service.UserService;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 
 @RestController
