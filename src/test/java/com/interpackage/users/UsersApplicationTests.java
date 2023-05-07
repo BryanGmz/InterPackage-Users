@@ -1,10 +1,13 @@
 package com.interpackage.users;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
-@SpringBootTest
-class UsersApplicationTests {
+@Testcontainers
+@EnableWebSecurity
+class UsersApplicationTests extends AbstractIntegrationTest{
+
 
 	@Test
 	void contextLoads() {

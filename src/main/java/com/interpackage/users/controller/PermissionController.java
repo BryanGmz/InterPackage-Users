@@ -1,8 +1,6 @@
 package com.interpackage.users.controller;
 
 import com.interpackage.users.model.Permission;
-import com.interpackage.users.model.Role;
-import com.interpackage.users.repository.PermissionRepository;
 import com.interpackage.users.service.PermissionService;
 import com.interpackage.users.util.CommonParams;
 import jakarta.validation.Valid;

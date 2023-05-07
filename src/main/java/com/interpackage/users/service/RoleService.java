@@ -2,17 +2,15 @@ package com.interpackage.users.service;
 
 import com.interpackage.users.model.Role;
 import com.interpackage.users.model.RolePermission;
-import com.interpackage.users.repository.PermissionRepository;
 import com.interpackage.users.repository.RoleRepository;
-import jakarta.persistence.EntityManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
+import org.springframework.web.context.annotation.RequestScope;
 
 @Service
+@RequestScope
 public class RoleService {
 
     private final RoleRepository roleRepo;

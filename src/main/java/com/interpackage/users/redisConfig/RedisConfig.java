@@ -1,9 +1,6 @@
 package com.interpackage.users.redisConfig;
 
-import java.time.Duration;
-
 import com.interpackage.users.auth.model.TokenCache;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;

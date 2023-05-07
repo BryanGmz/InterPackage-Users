@@ -1,14 +1,15 @@
 package com.interpackage.users.service;
 
 import com.interpackage.users.model.Permission;
-import com.interpackage.users.model.Role;
 import com.interpackage.users.repository.PermissionRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.annotation.RequestScope;
 
 @Service
+@RequestScope
 public class PermissionService {
 
     private final PermissionRepository permissionRepo;

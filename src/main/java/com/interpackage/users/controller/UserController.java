@@ -2,7 +2,6 @@ package com.interpackage.users.controller;
 
 import com.interpackage.users.util.CommonParams;
 import jakarta.validation.Valid;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import com.interpackage.users.model.User;
 import com.interpackage.users.service.UserService;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 
 @RestController

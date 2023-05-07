@@ -9,9 +9,11 @@ import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.annotation.RequestScope;
 
 
 @Service
+@RequestScope
 public class UserProducer {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserProducer.class);

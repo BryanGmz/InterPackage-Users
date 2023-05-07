@@ -1,9 +1,5 @@
 package com.interpackage.users.util;
 
-
-import org.springframework.boot.context.properties.bind.DefaultValue;
-import org.springframework.web.bind.annotation.RequestParam;
-
 public class CommonParams {
 
     private int page=0;
