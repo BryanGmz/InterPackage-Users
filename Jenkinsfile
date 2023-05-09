@@ -9,8 +9,8 @@ pipeline {
     stages {
         stage('Test Y Creacion De Jar') {
             steps {
-                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/BryanGmz/InterPackage-Users']])
-                sh 'ssh root@167.172.108.85 "cd /home/Interpackage/InterPackage-Users && git pull origin main && mvn clean install -DskipTests"'
+                checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/BryanGmz/InterPackage-Users']])
+                sh 'ssh root@167.172.108.85 "cd /home/Interpackage/InterPackage-Users && git pull origin master && mvn clean install -DskipTests"'
             }
         }
 
