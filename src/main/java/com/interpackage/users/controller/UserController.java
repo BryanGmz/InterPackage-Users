@@ -21,7 +21,7 @@ public class UserController {
     }
 
     @GetMapping("/{name}")
-    @RequiredRole({"Admin", "role"})
+    @RequiredRole({"Admin", "Client"})
     public ResponseEntity<User> getUserByName(@PathVariable String name) {
         User user = userService.getUserByName(name);
         return ResponseEntity.ok(user);
