@@ -25,7 +25,7 @@ public class SecurityConfiguration {
 		http
 				.csrf().disable().authorizeHttpRequests()
 				.requestMatchers("/api/users/v1/authenticate").permitAll()
-				.requestMatchers(new AntPathRequestMatcher("/api/users/v1/**")).permitAll()
+				//.requestMatchers(new AntPathRequestMatcher("/api/users/v1/**")).permitAll()
 				.requestMatchers(HttpMethod.OPTIONS, "/**")
 				.permitAll().anyRequest().authenticated().and().exceptionHandling()
 				.authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
