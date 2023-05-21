@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.interpackage.users.model.User;
 import com.interpackage.users.service.UserService;
-import com.interpackage.basedomains.aspect.RequiredRole;
+import com.interpackage.basedomains.users.RequiredRole;
 
 
 @RestController
