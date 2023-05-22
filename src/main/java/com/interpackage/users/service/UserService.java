@@ -35,9 +35,9 @@ public class UserService {
         }
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRole(roleRepository.getReferenceById(user.getRole().getIdRole()));
-        return userRepository.save(user);
-
+        User userSave = userRepository.save(user);
+        userSave.setRole(roleRepository.getReferenceById(user.getRole().getIdRole()));
+        return userSave;
     }
 
     public Page<User> getAllUser(int page, int size,boolean pagination) {
