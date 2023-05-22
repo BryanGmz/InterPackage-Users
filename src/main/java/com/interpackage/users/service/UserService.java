@@ -1,6 +1,7 @@
 package com.interpackage.users.service;
 
 import com.interpackage.users.model.User;
+import com.interpackage.users.repository.RoleRepository;
 import com.interpackage.users.repository.UserRepository;
 import com.interpackage.users.util.Constants;
 import org.springframework.data.domain.Page;
@@ -9,7 +10,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.annotation.RequestScope;
 
 import java.util.List;
 
@@ -17,9 +17,11 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
     }
 
     public User createUser(User user) throws Exception{
@@ -33,6 +35,7 @@ public class UserService {
         }
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole(roleRepository.getReferenceById(user.getRole().getIdRole()));
         return userRepository.save(user);
 
     }
