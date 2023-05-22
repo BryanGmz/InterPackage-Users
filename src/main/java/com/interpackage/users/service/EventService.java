@@ -31,7 +31,7 @@ public class EventService implements EventInterface {
         userEvent.setStatus(Constants.PENDING_STATE);
         userEvent.setUser(
                 new com.interpackage.basedomains.dto.User(
-                        user.getName(), user.getName(), user.getEmail(), user.getRole().getName()));
+                        user.getName(), user.getName(), user.getEmail(), user.getRole().getIdRole().toString()));
         userProducer.sendMessage(userEvent);
     }
 
