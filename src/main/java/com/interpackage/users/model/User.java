@@ -32,7 +32,7 @@ public class User {
     @Column (nullable = false, length = 250)
     private String password;
 
-    @ManyToOne
+    @ManyToOne (fetch = FetchType.EAGER)
     @JoinColumn (name = "id_role", nullable = false)
     private Role role;
 
