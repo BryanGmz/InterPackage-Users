@@ -2,6 +2,7 @@ package com.interpackage.users.service;
 
 import com.interpackage.users.model.User;
 import com.interpackage.users.repository.UserRepository;
+import com.interpackage.users.util.Constants;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -10,8 +11,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.RequestScope;
 
+import java.util.List;
+
 @Service
-@RequestScope
 public class UserService {
 
     private final UserRepository userRepository;
@@ -37,6 +39,10 @@ public class UserService {
 
     public Page<User> getAllUser(int page, int size,boolean pagination) {
        return  userRepository.findAll(pagination ? PageRequest.of(page,size) : Pageable.unpaged());
+    }
+
+    public List<User> getAllClients(){
+        return userRepository.findAllByRoleIdRole(Constants.ID_ROLE_CLIENT);
     }
 
     public User updateUser(User user, String name) throws Exception{

@@ -1,5 +1,7 @@
 package com.interpackage.users.controller;
 
+import com.interpackage.users.producers.UserProducer;
+import com.interpackage.users.service.EventService;
 import com.interpackage.users.util.CommonParams;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
@@ -15,9 +17,11 @@ import com.interpackage.basedomains.aspect.RequiredRole;
 @RequestMapping ("/api/users/v1/users")
 public class UserController {
     private final UserService userService;
+    private final EventService eventService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, EventService eventService) {
         this.userService = userService;
+        this.eventService = eventService;
     }
 
     @GetMapping("/{name}")
@@ -37,6 +41,7 @@ public class UserController {
         User user = null;
         try {
             user = userService.createUser(usr);
+            eventService.sendNotification(user);
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
         }

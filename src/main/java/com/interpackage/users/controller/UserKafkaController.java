@@ -13,7 +13,7 @@ import com.interpackage.users.producers.UserProducer;
 @RequestMapping("/api/v1")
 public class UserKafkaController {
     
-    private UserProducer userProducer;
+    private final UserProducer userProducer;
 
     public UserKafkaController(UserProducer userProducer) {
         this.userProducer = userProducer;
@@ -25,7 +25,7 @@ public class UserKafkaController {
         userEvent.setMessage("Prueba");
         userEvent.setStatus("PENDING");
         userEvent.setUser(user);
-        userProducer.SendMessage(userEvent);
+        userProducer.sendMessage(userEvent);
         return "User placed";
     }
     

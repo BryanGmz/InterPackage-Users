@@ -12,9 +12,18 @@ public class KafkaTopicConfig {
     @Value("${spring.kafka.topic.name}")
     private String topicName;
 
+    @Value("${spring.kafka.route-topic-notification.name}")
+    private String routeTopicName;
+
     @Bean
     public NewTopic topic(){
         return TopicBuilder.name(topicName)
             .build();
+    }
+
+    @Bean
+    public NewTopic routeTopic(){
+        return TopicBuilder.name(routeTopicName)
+                .build();
     }
 }
