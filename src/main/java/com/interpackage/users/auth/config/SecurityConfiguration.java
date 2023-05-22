@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 public class SecurityConfiguration {
@@ -24,6 +25,7 @@ public class SecurityConfiguration {
 		http
 				.csrf().disable().authorizeHttpRequests()
 				.requestMatchers("/api/users/v1/authenticate").permitAll()
+				//.requestMatchers(new AntPathRequestMatcher("/api/users/v1/**")).permitAll()
 				.requestMatchers(HttpMethod.OPTIONS, "/**")
 				.permitAll().anyRequest().authenticated().and().exceptionHandling()
 				.authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()

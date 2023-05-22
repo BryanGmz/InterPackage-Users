@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.interpackage.users.model.User;
 import com.interpackage.users.service.UserService;
-import com.interpackage.basedomains.aspect.RequiredRole;
+import com.interpackage.users.aspect.RequiredRole;
 
 
 @RestController
@@ -25,18 +25,20 @@ public class UserController {
     }
 
     @GetMapping("/{name}")
-    @RequiredRole({"Admin", "role test"})
+    @RequiredRole({"Admin", "Client"})
     public ResponseEntity<User> getUserByName(@PathVariable String name) {
         User user = userService.getUserByName(name);
         return ResponseEntity.ok(user);
     }
 
     @GetMapping()
+    @RequiredRole({"Admin", "role test"})
     public ResponseEntity<Page<User>> getAllUsers(CommonParams commonParams) {
         return ResponseEntity.ok(userService.getAllUser(commonParams.getPage(),commonParams.getMax(), commonParams.isPagination()));
     }
 
     @PostMapping()
+    @RequiredRole({"Admin", "role test"})
     public ResponseEntity<?> createUser(@Valid @RequestBody User usr){
         User user = null;
         try {
@@ -49,6 +51,7 @@ public class UserController {
     }
 
     @PutMapping("/{name}")
+    @RequiredRole({"Admin", "role test"})
     public ResponseEntity<?> updateUser(@RequestBody User usr, @PathVariable String name){
         User user = null;
         try {
@@ -60,6 +63,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{name}")
+    @RequiredRole({"Admin", "role test"})
     public ResponseEntity<?> deleteUser(@PathVariable String name){
         try {
             userService.deleteUser(name);
