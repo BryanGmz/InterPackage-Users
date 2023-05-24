@@ -21,6 +21,7 @@ public class RoleController {
     }
 
     @GetMapping("/{id}")
+    @RequiredRole({"Admin", "Client"})
     public ResponseEntity<?> getRoleById(@PathVariable Long id) {
         var role = roleService.findById(id);
         if(role!=null){
@@ -30,11 +31,13 @@ public class RoleController {
     }
 
     @GetMapping()
+    @RequiredRole({"Admin", "Client"})
     public ResponseEntity<Page<Role>> getRoles(CommonParams commonParams) {
         return ResponseEntity.ok(roleService.getAllRoles(commonParams.getPage(),commonParams.getMax(), commonParams.isPagination()));
     }
 
     @PostMapping()
+    @RequiredRole({"Admin", "Client"})
     public ResponseEntity<?> create(@Valid @RequestBody Role entity){
         Role newEntity = null;
         try {
@@ -46,6 +49,7 @@ public class RoleController {
     }
 
     @PutMapping("/{id}")
+    @RequiredRole({"Admin", "Client"})
     public ResponseEntity<?> updateUser(@RequestBody Role usr, @PathVariable Long id){
         Role entity = null;
         try {
@@ -57,6 +61,7 @@ public class RoleController {
     }
 
     @DeleteMapping("/{id}")
+    @RequiredRole({"Admin", "Client"})
     public ResponseEntity<?> deleteUser(@PathVariable Long id){
         try {
             roleService.deleteRole(id);
