@@ -1,8 +1,10 @@
 package com.interpackage.users.controller;
 
+import com.interpackage.users.model.Response;
 import com.interpackage.users.producers.UserProducer;
 import com.interpackage.users.service.EventService;
 import com.interpackage.users.util.CommonParams;
+import com.interpackage.users.util.Constants;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -71,5 +73,14 @@ public class UserController {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
         }
         return  ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/getByDPI/{dpi}")
+    @RequiredRole({
+            Constants.ROLE_ADMIN,
+            Constants.ROLE_RECEPTIONIST
+    })
+    public ResponseEntity<Response> getClientByDPI(@PathVariable String dpi) {
+        return this.userService.getClientByDpi(dpi);
     }
 }

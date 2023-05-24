@@ -15,6 +15,6 @@ import com.interpackage.users.model.User;
 public interface UserRepository extends JpaRepository<User,Long> {
     Optional<User> findByName(String name);
     Optional<User> findByEmail(String email);
-
     List<User> findAllByRoleIdRole(Long id);
+    Optional<User> findByDpiAndRole(String dpi, Long role);
 }

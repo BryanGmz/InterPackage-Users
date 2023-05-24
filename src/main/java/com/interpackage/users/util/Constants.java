@@ -17,7 +17,7 @@ public final class Constants {
     /**
      * The Role Admin.
      */
-    public static final String ROLE_ADMIN = "ADMIN";
+    public static final String ROLE_ADMIN = "Admin";
 
     /**
      * The Role Operator.
@@ -28,11 +28,11 @@ public final class Constants {
      * The Role Client.
      */
     public static final Long ID_ROLE_CLIENT = 3L;
-    public static final String ROLE_CLIENT = "CLIENT";
+    public static final String ROLE_CLIENT = "Client";
     /**
      * The Role Receptionist.
      */
-    public static final String ROLE_RECEPTIONIST = "RECEPTIONIST";
+    public static final String ROLE_RECEPTIONIST = "Receptionist";
 
     public static final String MESSAGE_NOTIFICATION = "Notification";
     public static final String PENDING_STATE = "Pending";
