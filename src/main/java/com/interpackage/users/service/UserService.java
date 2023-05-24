@@ -1,6 +1,7 @@
 package com.interpackage.users.service;
 
 import com.interpackage.users.model.Response;
+import com.interpackage.users.model.Role;
 import com.interpackage.users.model.User;
 import com.interpackage.users.repository.RoleRepository;
 import com.interpackage.users.repository.UserRepository;
@@ -76,9 +77,11 @@ public class UserService {
 
     public ResponseEntity<Response> getClientByDpi(String dpi){
         try {
+                Role role = new Role();
+                role.setIdRole(Constants.ID_ROLE_CLIENT);
                 Optional<User> userOptional =
                         this.userRepository
-                                .findByDpiAndRole(dpi, Constants.ID_ROLE_CLIENT);
+                                .findByDpiAndRole(dpi, role);
                 return userOptional
                         .map(user ->
                                 ResponseEntity.ok(new Response(user)))

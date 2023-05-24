@@ -76,10 +76,10 @@ public class UserController {
     }
 
     @GetMapping("/getByDPI/{dpi}")
-    @RequiredRole({
+    /*/@RequiredRole({
             Constants.ROLE_ADMIN,
             Constants.ROLE_RECEPTIONIST
-    })
+    })*/
     public ResponseEntity<Response> getClientByDPI(@PathVariable String dpi) {
         return this.userService.getClientByDpi(dpi);
     }
